@@ -374,7 +374,9 @@ if ENABLE_LTI:
     LTI_CONFIG_DISABLE_DEPLOYMENT_ID_VALIDATION = ENV.get('LTI_CONFIG_DISABLE_DEPLOYMENT_ID_VALIDATION', False)
 
 # This is used to fix ids from Canvas Data which are incremented by some large number
-CANVAS_DATA_ID_INCREMENT = ENV.get("CANVAS_DATA_ID_INCREMENT", 17700000000000000)
+CANVAS_DATA_ID_INCREMENT = ENV.get("CANVAS_DATA_ID_INCREMENT")
+if CANVAS_DATA_ID_INCREMENT is None:
+    raise ValueError("The CANVAS_DATA_ID_INCREMENT environment variable must be set to your instance's CANVAS ID, but it is currently unset.")
 
 # Allow enabling/disabling the View options globally
 VIEWS_DISABLED = ENV.get('VIEWS_DISABLED', [])
